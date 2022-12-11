@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Users\Subjects;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
+        $this->call(SubjectsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
