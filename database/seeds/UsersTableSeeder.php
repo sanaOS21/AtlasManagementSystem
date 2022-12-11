@@ -28,5 +28,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => date('Y-m-d H:i:s'),
         ]);
+        // 「php artisan db:seed」 をターミナルに入力したら反映された！
     }
 }
