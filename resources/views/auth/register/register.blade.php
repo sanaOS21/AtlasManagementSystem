@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Oswald:wght@200&display=swap" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
+
 <body>
   <form action="{{ route('registerPost') }}" method="POST">
     <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
@@ -23,12 +25,18 @@
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name" name="over_name">
               </div>
+              @if ($errors->has('over_name'))
+              <p>{{$errors->first('over_name')}}</p>
+              @endif
             </div>
             <div class="" style="width:140px">
               <label class=" d-block m-0" style="font-size:13px">名</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 under_name" name="under_name">
               </div>
+              @if ($errors->has('under_name'))
+              <p>{{$errors->first('under_name')}}</p>
+              @endif
             </div>
           </div>
           <div class="d-flex mt-3" style="justify-content:space-between">
@@ -37,12 +45,18 @@
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana">
               </div>
+              @if ($errors->has('over_name_kana'))
+              <p>{{$errors->first('over_name_kana')}}</p>
+              @endif
             </div>
             <div class="" style="width:140px">
               <label class="d-block m-0" style="font-size:13px">メイ</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 under_name_kana" name="under_name_kana">
               </div>
+              @if ($errors->has('under_name_kana'))
+              <p>{{$errors->first('under_name_kana')}}</p>
+              @endif
             </div>
           </div>
           <div class="mt-3">
@@ -50,6 +64,9 @@
             <div class="border-bottom border-primary">
               <input type="mail" class="w-100 border-0 mail_address" name="mail_address">
             </div>
+            @if ($errors->has('mail_address'))
+            <p>{{$errors->first('mail_address')}}</p>
+            @endif
           </div>
         </div>
         <div class="mt-3">
@@ -59,6 +76,9 @@
           <label style="font-size:13px">女性</label>
           <input type="radio" name="sex" class="sex" value="3">
           <label style="font-size:13px">その他</label>
+          @if ($errors->has('sex'))
+          <p>{{$errors->first('sex')}}</p>
+          @endif
         </div>
         <div class="mt-3">
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
@@ -143,6 +163,15 @@
             <option value="31">31</option>
           </select>
           <label style="font-size:13px">月</label>
+          @if ($errors->has('old_year'))
+          <p>{{$errors->first('old_year')}}</p>
+          @endif
+          @if ($errors->has('old_month'))
+          <p>{{$errors->first('old_month')}}</p>
+          @endif
+          @if ($errors->has('old_day'))
+          <p>{{$errors->first('old_day')}}</p>
+          @endif
         </div>
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">役職</label>
@@ -154,6 +183,9 @@
           <label style="font-size:13px">教師(英語)</label>
           <input type="radio" name="role" class="other_role role" value="4">
           <label style="font-size:13px" class="other_role">生徒</label>
+          @if ($errors->has('role'))
+          <p>{{$errors->first('role')}}</p>
+          @endif
         </div>
         <div class="select_teacher d-none">
           <label class="d-block m-0" style="font-size:13px">選択科目</label>
@@ -169,11 +201,17 @@
           <div class="border-bottom border-primary">
             <input type="password" class="border-0 w-100 password" name="password">
           </div>
+          @if ($errors->has('password'))
+          <p>{{$errors->first('password')}}</p>
+          @endif
         </div>
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">確認用パスワード</label>
           <div class="border-bottom border-primary">
             <input type="password" class="border-0 w-100 password_confirmation" name="password">
+            @if ($errors->has('password'))
+            <p>{{$errors->first('password')}}</p>
+            @endif
           </div>
         </div>
         <div class="mt-5 text-right">
@@ -190,4 +228,5 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="{{ asset('js/register.js') }}" rel="stylesheet"></script>
 </body>
+
 </html>

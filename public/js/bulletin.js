@@ -4,6 +4,7 @@ $(function () {
     $('.category_num' + category_id).slideToggle();
   });
 
+  // いいねを押下
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');
@@ -48,7 +49,7 @@ $(function () {
     });
   });
 
-  $('.edit-modal-open').on('click',function(){
+  $('.edit-modal-open').on('click', function () {
     $('.js-modal').fadeIn();
     var post_title = $(this).attr('post_title');
     var post_body = $(this).attr('post_body');

@@ -23,6 +23,9 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
+        // [02]コメント数表示のため下記追加
+        $comment = new PostComment;
+
         if (!empty($request->keyword)) {
             $posts = Post::with('user', 'postComments')
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
@@ -88,7 +91,7 @@ class PostsController extends Controller
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
-
+    // コメントの登録
     public function commentCreate(Request $request)
     {
         PostComment::create([
@@ -105,7 +108,7 @@ class PostsController extends Controller
         $like = new Like;
         return view('authenticated.bulletinboard.post_myself', compact('posts', 'like'));
     }
-
+    // いいねした投稿
     public function likeBulletinBoard()
     {
         $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
@@ -113,13 +116,13 @@ class PostsController extends Controller
         $like = new Like;
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
-
+    // いいねの切り替え
     public function postLike(Request $request)
     {
         Auth::user()->likes()->attach($request->post_id);
         return response()->json();
     }
-
+    // いいねの解除
     public function postUnLike(Request $request)
     {
         Auth::user()->likes()->detach($request->post_id);
