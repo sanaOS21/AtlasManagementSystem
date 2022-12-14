@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
-
+use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Models\Users\Subjects;
 
 class RegisterController extends Controller
@@ -56,6 +56,11 @@ class RegisterController extends Controller
         $subjects = Subjects::all();
         return view('auth.register.register', compact('subjects'));
     }
+    public function registerValidate(PostFormRequest $request)
+    {
+        return view('auth.register.register');
+    }
+
 
     public function registerPost(Request $request)
     {
@@ -78,7 +83,10 @@ class RegisterController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
+
             $user = User::findOrFail($user_get->id);
+            $register = $request->validated();
+
             $user->subjects()->attach($subjects);
             DB::commit();
             return view('auth.login.login');

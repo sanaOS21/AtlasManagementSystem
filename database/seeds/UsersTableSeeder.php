@@ -28,6 +28,20 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => date('Y-m-d H:i:s'),
         ]);
+        DB::table('users')->insert([
+            'over_name' => '佐藤',
+            'under_name' => '沙南',
+            'over_name_kana' => 'サトウ',
+            'under_name_kana' => 'サナ',
+            'mail_address' => 'satou@mail',
+            // バリューを入力！
+            'sex' => '2',
+            // 「/」、「年月日」入力×
+            'role' => '4',
+            'birth_day' => '2000-10-01',
+            'password' => bcrypt('satousatou'),
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
         // 「php artisan db:seed」 をターミナルに入力したら反映された！
     }
 }
