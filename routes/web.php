@@ -14,6 +14,8 @@
 Route::group(['middleware' => ['guest']], function () {
     Route::namespace('Auth')->group(function () {
         Route::get('/register', 'RegisterController@registerView')->name('registerView');
+        // 　バリデーション
+        Route::get('/register/varidate', 'RegisterController@rule')->name('registerRule');
         Route::post('/register/post', 'RegisterController@registerPost')->name('registerPost');
         // 【01】タイムアウトにならないようにする！
         Route::get('/login', 'LoginController@loginView')->name('loginView');

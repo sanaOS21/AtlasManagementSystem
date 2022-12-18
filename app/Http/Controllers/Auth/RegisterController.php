@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
-use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\RegisterFormRequest;
 use App\Models\Users\Subjects;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -56,14 +57,18 @@ class RegisterController extends Controller
         $subjects = Subjects::all();
         return view('auth.register.register', compact('subjects'));
     }
-    public function registerValidate(PostFormRequest $request)
+
+    public function rule(RegisterFormRequest $request)
     {
-        return view('auth.register.register');
+        // バリデーション済みデータの取得
+        $validated = $request->validated();
+        return view('registerRule');
     }
 
 
-    public function registerPost(Request $request)
+    public function registerPost(RegisterFormRequest $request)
     {
+        // ↓ トランザクションを開始（まだDBに反映されない）
         DB::beginTransaction();
         try {
             $old_year = $request->old_year;
@@ -72,6 +77,7 @@ class RegisterController extends Controller
             $data = $old_year . '-' . $old_month . '-' . $old_day;
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
+
             $user_get = User::create([
                 'over_name' => $request->over_name,
                 'under_name' => $request->under_name,
@@ -81,16 +87,18 @@ class RegisterController extends Controller
                 'sex' => $request->sex,
                 'birth_day' => $birth_day,
                 'role' => $request->role,
-                'password' => bcrypt($request->password)
+                'password' => Hash::make($request->password),
             ]);
 
+            // findOrFail()...は一致するidが見つからない場合はエラー
             $user = User::findOrFail($user_get->id);
-            $register = $request->validated();
 
             $user->subjects()->attach($subjects);
+            // ↓コメット＝（トランザクションを）確定！　DBに反映される
             DB::commit();
             return view('auth.login.login');
         } catch (\Exception $e) {
+            // ↓ロールバック＝（トランザクションを）破棄！（トランザクション前に戻す）
             DB::rollback();
             return redirect()->route('loginView');
         }

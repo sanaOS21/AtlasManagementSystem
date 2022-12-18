@@ -23,16 +23,16 @@
             <div class="" style="width:140px">
               <label class="d-block m-0" style="font-size:13px">姓</label>
               <div class="border-bottom border-primary" style="width:140px;">
-                <input type="text" style="width:140px;" class="border-0 over_name" name="over_name">
+                <input type="text" style="width:140px;" class="border-0 over_name" name="over_name" value="{{ old('over_name') }}">
               </div>
               @if ($errors->has('over_name'))
               <p>{{$errors->first('over_name')}}</p>
               @endif
             </div>
-            <div class="" style="width:140px">
+            <div class="" style=" width:140px">
               <label class=" d-block m-0" style="font-size:13px">名</label>
               <div class="border-bottom border-primary" style="width:140px;">
-                <input type="text" style="width:140px;" class="border-0 under_name" name="under_name">
+                <input type="text" style="width:140px;" class="border-0 under_name" name="under_name" value="{{old('under_name') }}">
               </div>
               @if ($errors->has('under_name'))
               <p>{{$errors->first('under_name')}}</p>
@@ -43,7 +43,7 @@
             <div class="" style="width:140px">
               <label class="d-block m-0" style="font-size:13px">セイ</label>
               <div class="border-bottom border-primary" style="width:140px;">
-                <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana">
+                <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana" value="{{old('over_name_kana') }}">
               </div>
               @if ($errors->has('over_name_kana'))
               <p>{{$errors->first('over_name_kana')}}</p>
@@ -52,7 +52,7 @@
             <div class="" style="width:140px">
               <label class="d-block m-0" style="font-size:13px">メイ</label>
               <div class="border-bottom border-primary" style="width:140px;">
-                <input type="text" style="width:140px;" class="border-0 under_name_kana" name="under_name_kana">
+                <input type="text" style="width:140px;" class="border-0 under_name_kana" name="under_name_kana" value="{{old('under_name_kana') }}">
               </div>
               @if ($errors->has('under_name_kana'))
               <p>{{$errors->first('under_name_kana')}}</p>
@@ -62,7 +62,7 @@
           <div class="mt-3">
             <label class="m-0 d-block" style="font-size:13px">メールアドレス</label>
             <div class="border-bottom border-primary">
-              <input type="mail" class="w-100 border-0 mail_address" name="mail_address">
+              <input type="mail" class="w-100 border-0 mail_address" name="mail_address" value="{{old('mail_address') }}">
             </div>
             @if ($errors->has('mail_address'))
             <p>{{$errors->first('mail_address')}}</p>
@@ -199,7 +199,7 @@
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">パスワード</label>
           <div class="border-bottom border-primary">
-            <input type="password" class="border-0 w-100 password" name="password">
+            <input type="password" class="border-0 w-100 password" name="password" value="{{old('password') }}">
           </div>
           @if ($errors->has('password'))
           <p>{{$errors->first('password')}}</p>
@@ -208,7 +208,7 @@
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">確認用パスワード</label>
           <div class="border-bottom border-primary">
-            <input type="password" class="border-0 w-100 password_confirmation" name="password">
+            <input type="password" class="border-0 w-100 password_confirmation" name="password" value="{{old('password') }}">
             @if ($errors->has('password'))
             <p>{{$errors->first('password')}}</p>
             @endif
