@@ -111,21 +111,33 @@ class PostsController extends Controller
     // いいねした投稿
     public function likeBulletinBoard()
     {
+        // toArray()...Collectionを配列に変換する時に使うメソッド(全て配列に変換する)。
+        // with('')->where('',$変数)->get()...データを取得する
         $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
         $posts = Post::with('user')->whereIn('id', $like_post_id)->get();
+
+        // Likeモデルのインスタンスを作成
         $like = new Like;
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
     // いいねの切り替え
     public function postLike(Request $request)
     {
+        // attach...完全重複可。全てのデータが中間テーブルに保存される。↔︎sync(重複不可)
         Auth::user()->likes()->attach($request->post_id);
         return response()->json();
     }
     // いいねの解除
     public function postUnLike(Request $request)
     {
+        // detach...ヒモ付の解除をする
         Auth::user()->likes()->detach($request->post_id);
         return response()->json();
+    }
+
+    public function index()
+    {
+        $likes = Post::withCount('likes')->get();
+        return view('posts', compact('posts'));
     }
 }

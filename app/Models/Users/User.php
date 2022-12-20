@@ -54,32 +54,46 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts(){
+    public function posts()
+    {
+        // hasMany(1対多)...主テーブルのあるレコードに従テーブルの複数のレコードが紐付け○
+        // hasMany('従テーブル','参照先テーブルの外部キー','参照元テーブルの内部キー');
         return $this->hasMany('App\Models\Posts\Post');
     }
 
-    public function calendars(){
+    public function calendars()
+    {
+        // belongsToMany...中間テーブルのデータを参照するときに使用
+        // belongsToMany('eloquentモデル','中間テーブル名','自分に向けられた外部テーブル','相手に向けられた外部テーブル');　※第二引数は省略可。
+        // withPivot...()内を簡単に取得できる
         return $this->belongsToMany('App\Models\Calendars\Calendar', 'calendar_users', 'user_id', 'calendar_id')->withPivot('user_id', 'id');
     }
 
-    public function reserveSettings(){
+    public function reserveSettings()
+    {
         return $this->belongsToMany('App\Models\Calendars\ReserveSettings', 'reserve_setting_users', 'user_id', 'reserve_setting_id')->withPivot('id');
     }
 
-    public function likes(){
+    public function likes()
+    {
         return $this->belongsToMany('App\Models\Posts\Like', 'likes', 'like_user_id', 'like_post_id')->withPivot('id');
     }
 
-    public function subjects(){
-        return ;// リレーションの定義
+    // リレーションの定義
+    public function subjects()
+    {
+        // belongsToMany('eloquentモデル','中間テーブル名','自分に向けられた外部テーブル','相手に向けられた外部テーブル');　※第二引数は省略可。
+        return $this->belongsToMany('App\Models\Users\Subjects', 'subject_users', 'user_id', 'subject_id');
     }
 
     // いいねしているかどうか
-    public function is_Like($post_id){
+    public function is_Like($post_id)
+    {
         return Like::where('like_user_id', Auth::id())->where('like_post_id', $post_id)->first(['likes.id']);
     }
 
-    public function likePostId(){
+    public function likePostId()
+    {
         return Like::where('like_user_id', Auth::id());
     }
 }
