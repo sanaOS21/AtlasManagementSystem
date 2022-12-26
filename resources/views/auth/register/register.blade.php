@@ -84,7 +84,7 @@
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
             <option value="none">-----</option>
-            <option value="1985">1985</option>
+            <!-- <option value="1985">1985</option>
             <option value="1986">1986</option>
             <option value="1987">1987</option>
             <option value="1988">1988</option>
@@ -98,7 +98,7 @@
             <option value="1996">1996</option>
             <option value="1997">1997</option>
             <option value="1998">1998</option>
-            <option value="1999">1999</option>
+            <option value="1999">1999</option> -->
             <option value="2000">2000</option>
             <option value="2001">2001</option>
             <option value="2002">2002</option>
@@ -110,6 +110,19 @@
             <option value="2008">2008</option>
             <option value="2009">2009</option>
             <option value="2010">2010</option>
+            <option value="2000">2011</option>
+            <option value="2001">2012</option>
+            <option value="2002">2013</option>
+            <option value="2003">2014</option>
+            <option value="2004">2015</option>
+            <option value="2005">2016</option>
+            <option value="2006">2017</option>
+            <option value="2007">2018</option>
+            <option value="2008">2019</option>
+            <option value="2009">2020</option>
+            <option value="2010">2021</option>
+            <option value="2009">2022</option>
+            <option value="2010">2023</option>
           </select>
           <label style="font-size:13px">年</label>
           <select class="old_month" name="old_month">
@@ -187,6 +200,7 @@
           <p>{{$errors->first('role')}}</p>
           @endif
         </div>
+
         <div class="select_teacher d-none">
           <label class="d-block m-0" style="font-size:13px">選択科目</label>
           @foreach($subjects as $subject)

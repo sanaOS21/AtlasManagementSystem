@@ -35,13 +35,25 @@
   @can('admin')
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
+
       <div class="">
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
+
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
+        <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+        <p class="m-0">サブカテゴリー</p>
+        <input type="text" class="w-100" name="main_category_name" form="SubCategoryRequest">
+
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="CategoryRequest">
       </div>
       <!-- サブカテゴリー追加 -->
       <form action="{{ route('main.category.create') }}" method="post" id="mainCategoryRequest">{{ csrf_field() }}</form>
+
     </div>
   </div>
   @endcan

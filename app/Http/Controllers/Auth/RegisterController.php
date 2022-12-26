@@ -58,12 +58,12 @@ class RegisterController extends Controller
         return view('auth.register.register', compact('subjects'));
     }
 
-    public function rule(RegisterFormRequest $request)
-    {
-        // バリデーション済みデータの取得
-        $validated = $request->validated();
-        return view('registerRule');
-    }
+    // public function rule(RegisterFormRequest $request)
+    // {
+    //     // バリデーション済みデータの取得
+    //     $validated = $request->validated();
+    //     return view('registerRule');
+    // }
 
 
     public function registerPost(RegisterFormRequest $request)
@@ -74,10 +74,10 @@ class RegisterController extends Controller
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
-            $data = $old_year . '-' . $old_month . '-' . $old_day;
-            $birth_day = date('Y-m-d', strtotime($data));
+            $full_data = $old_year . '-' . $old_month . '-' . $old_day;
+            $birth_day = date('Y-m-d', strtotime($full_data));
             $subjects = $request->subject;
-
+            // 新規登録を実行
             $user_get = User::create([
                 'over_name' => $request->over_name,
                 'under_name' => $request->under_name,

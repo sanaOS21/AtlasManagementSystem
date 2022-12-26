@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/bulletin_board/edit', 'PostsController@postEdit')->name('post.edit');
             Route::get('/bulletin_board/delete/{id}', 'PostsController@postDelete')->name('post.delete');
             Route::post('/comment/create', 'PostsController@commentCreate')->name('comment.create');
+            // いいね
             Route::post('/like/post/{id}', 'PostsController@postLike')->name('post.like');
             Route::post('/unlike/post/{id}', 'PostsController@postUnLike')->name('post.unlike');
         });
