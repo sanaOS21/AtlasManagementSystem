@@ -52,7 +52,7 @@ class RegisterFormRequest extends FormRequest
       'birth_day' => 'required|date|before:today|after:2000-01-01',
       // in...1~4であることをバリデートする
       'role' => 'required|in:1,2,3,4',
-      'subject' => 'in:1,2,3,4',
+      'subject' => 'required|in:1,2,3,4',
       'password' => 'required|string|max:30|min:8|confirmed',
     ];
   }
