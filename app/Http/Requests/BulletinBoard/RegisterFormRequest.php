@@ -44,7 +44,7 @@ class RegisterFormRequest extends FormRequest
       'under_name_kana' => 'required|string|max:30|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u',
       'mail_address' => 'required|string|max:100|unique:users',
       // exists:テーブル名、カラム名...テーブル内に指定したカラムがあるか確認する
-      'sex' => 'required|exists:users,sex',
+      'sex' => 'required|in:1,2,3',
       // 'old_year' => 'required|after:1999',
       // 'old_month' => 'required',
       // 'old_day' => 'required',
