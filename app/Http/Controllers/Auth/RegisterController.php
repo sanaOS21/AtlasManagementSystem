@@ -74,8 +74,8 @@ class RegisterController extends Controller
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
-            $full_data = $old_year . '-' . $old_month . '-' . $old_day;
-            $birth_day = date('Y-m-d', strtotime($full_data));
+            $data = $old_year . '-' . $old_month . '-' . $old_day;
+            $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
             // 新規登録を実行
             $user_get = User::create([

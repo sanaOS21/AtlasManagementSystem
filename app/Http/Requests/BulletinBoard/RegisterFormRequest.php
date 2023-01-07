@@ -16,17 +16,19 @@ class RegisterFormRequest extends FormRequest
     return true;
   }
 
-  // 参考サイト参照
-  // public function getValidatorInstance()
-  // {
-  //   // デフォルト値は空の設定
-  //   $datetime = $this->input('old_year', 'old_month', 'old_day', array());
-  //   // 日付を作成
-  //   $full_data = implode('-', $datetime);
-
-  //   $this->merge(['full_data' => $full_data,]);
-  //   return parent::getValidatorInstance();
-  // }
+  public function getValidatorInstance()
+  {
+    // データの取得
+    $old_year = $this->input('old_year');
+    // dd($old_year);
+    $old_month = $this->input('old_month');
+    $old_day = $this->input('old_day');
+    // データの統合
+    $birth_day = ($old_year . '-' . $old_month . '-' . $old_day);
+    // 上書き保存
+    $this->merge(['birth_day' => $birth_day,]);
+    return parent::getValidatorInstance();
+  }
 
   /**
    * Get the validation rules that apply to the request.
@@ -43,14 +45,14 @@ class RegisterFormRequest extends FormRequest
       'mail_address' => 'required|string|max:100|unique:users',
       // exists:テーブル名、カラム名...テーブル内に指定したカラムがあるか確認する
       'sex' => 'required|exists:users,sex',
-      'old_year' => 'required|after:1999',
-      'old_month' => 'required',
-      'old_day' => 'required',
+      // 'old_year' => 'required|after:1999',
+      // 'old_month' => 'required',
+      // 'old_day' => 'required',
       // 誕生日を3つのデータを１つのデータとして扱う
       'birth_day' => 'required|date|before:today|after:2000-01-01',
       // in...1~4であることをバリデートする
-      'role' => 'required|exists:users,role|in:1,2,3,4',
-      'subject' => 'required|exists:subjects,subject',
+      'role' => 'required|in:1,2,3,4',
+      'subject' => 'in:1,2,3,4',
       'password' => 'required|string|max:30|min:8|confirmed',
     ];
   }
@@ -62,10 +64,13 @@ class RegisterFormRequest extends FormRequest
     // 日時をデータに追加
     // filled(valueに入れている値)...キーが存在し、値が入力されたらtrue!(キーが存在しない、nullはfalse)
     // ?...<条件式>?<真式>:<偽式> ←(条件演算式)
-    $birth_day = ($this->filled(['old_year', 'old_month', 'old_day'])) ?
-      $this->old_year . '-' . $this->old_month . '-' . $this->old_day : '';
-    $this->merge(['birth_day' => $birth_day]);
+    // $birth_day = ($this->filled(['old_year', 'old_month', 'old_day'])) ?
+    //   $this->old_year . '-' . $this->old_month . '-' . $this->old_day : '';
+    // $this->merge(['birth_day' => $birth_day]);
   }
+
+
+
 
 
   // public 優先順位は低い。どこからでもアクセスが可能！
