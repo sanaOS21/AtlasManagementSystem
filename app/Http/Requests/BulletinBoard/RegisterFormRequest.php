@@ -25,6 +25,7 @@ class RegisterFormRequest extends FormRequest
     $old_day = $this->input('old_day');
     // データの統合
     $birth_day = ($old_year . '-' . $old_month . '-' . $old_day);
+    // dd($birth_day);
     // 上書き保存
     $this->merge(['birth_day' => $birth_day,]);
     return parent::getValidatorInstance();
@@ -52,7 +53,8 @@ class RegisterFormRequest extends FormRequest
       'birth_day' => 'required|date|before:today|after:2000-01-01',
       // in...1~4であることをバリデートする
       'role' => 'required|in:1,2,3,4',
-      'subject' => 'required|in:1,2,3,4',
+
+      // 'subject' => 'required|in:1,2,3,4',
       'password' => 'required|string|max:30|min:8|confirmed',
     ];
   }
