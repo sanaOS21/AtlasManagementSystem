@@ -18,6 +18,12 @@ class Like extends Model
         return $this->belongsToMany('App\Models\Users\User', 'likes', 'like_post_id', 'like_user_id');
     }
 
+    public function post()
+    {
+        return $this->belongsToMany('App\Models\Posts\Post');
+    }
+
+
     public function likeCounts($post_id)
     {
         // いいねした投稿のIDを取得しカウント

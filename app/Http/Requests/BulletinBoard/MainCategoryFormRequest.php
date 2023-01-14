@@ -33,7 +33,7 @@ class MainCategoryFormRequest extends FormRequest
     {
         return [
             'main_category_name.required' => 'メインカテゴリーを記入してください',
-            'main_category_name.unique' => 'すでに登録されています',
+            'main_category_name.unique' => 'すでに登録されています'
         ];
     }
 }
