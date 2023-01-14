@@ -28,6 +28,12 @@ class Post extends Model
     public function subCategories()
     {
         // リレーションの定義
+        // 第一引数：リレーション先のモデル名
+        // 第二引数：リレーション先のテーブル名
+        // 第三引数：自モデルの主キー
+        // 第四引数：相手モデルの主キー
+        // belongsToMany.....多対多
+        return $this->belongsToMany('App\Models\Categories\SubCategory', 'post_sub_categories', 'post_id', 'sub_category_id');
     }
 
     // コメント数

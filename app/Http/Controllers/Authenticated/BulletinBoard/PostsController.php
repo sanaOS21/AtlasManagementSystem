@@ -11,6 +11,8 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\SubCategoryFormRequest;
+use App\Http\Requests\BulletinBoard\MainCategoryFormRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -25,7 +27,6 @@ class PostsController extends Controller
         $post_comment = new Post;
         // [02]コメント数表示のため下記追加
         $comment = new PostComment;
-
         if (!empty($request->keyword)) {
             $posts = Post::with('user', 'postComments')
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
@@ -56,7 +57,9 @@ class PostsController extends Controller
     public function postInput()
     {
         $main_categories = MainCategory::get();
-        return view('authenticated.bulletinboard.post_create', compact('main_categories'));
+        // サブカテゴリーを取得するため下記追加
+        $sub_categories = SubCategory::get();
+        return view('authenticated.bulletinboard.post_create', compact('main_categories', 'sub_categories'));
     }
 
     // 投稿
@@ -88,14 +91,14 @@ class PostsController extends Controller
     }
 
     // メインカテゴリー
-    public function mainCategoryCreate(Request $request)
+    public function mainCategoryCreate(MainCategoryFormRequest $request)
     {
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
 
     // サブカテゴリー
-    public function SubCategoryCreate(Request $request)
+    public function subCategoryCreate(SubCategoryFormRequest $request)
     {
         SubCategory::create(['sub_category' => $request->sub_category_name]);
         return redirect()->route('post.input');
