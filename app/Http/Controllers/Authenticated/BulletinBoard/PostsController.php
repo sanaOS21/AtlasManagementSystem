@@ -35,6 +35,7 @@ class PostsController extends Controller
             $sub_category = $request->category_word;
             $posts = Post::with('user', 'postComments')->get();
         } else if ($request->like_posts) {
+            // いいねした投稿を表示
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
                 ->whereIn('id', $likes)->get();
@@ -129,7 +130,6 @@ class PostsController extends Controller
         // with('')->where('',$変数)->get()...データを取得する
         $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
         $posts = Post::with('user')->whereIn('id', $like_post_id)->get();
-
         // Likeモデルのインスタンスを作成
         $like = new Like;
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));

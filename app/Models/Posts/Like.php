@@ -15,6 +15,7 @@ class Like extends Model
 
     public function users()
     {
+        // 多対多
         return $this->belongsToMany('App\Models\Users\User', 'likes', 'like_post_id', 'like_user_id');
     }
 

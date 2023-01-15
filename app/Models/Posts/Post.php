@@ -43,8 +43,8 @@ class Post extends Model
     }
 
     // いいね
-    public function likes()
-    {
-        return $this->belongsToMany('App\Models\Like');
-    }
+    // public function likes()
+    // {
+    //     return $this->belongsToMany('App\Models\Like');
+    // }
 }
