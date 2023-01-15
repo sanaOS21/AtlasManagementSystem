@@ -12,7 +12,7 @@
         <div class="d-flex post_status">
 
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class=""></span>
+            <i class="fa fa-comment"></i><span class="">{{ $post_comment->commentCounts($post->id)->get()->count() }}</span>
           </div>
 
           <div>

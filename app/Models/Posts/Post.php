@@ -22,6 +22,7 @@ class Post extends Model
 
     public function postComments()
     {
+        // hasMany(1対多)
         return $this->hasMany('App\Models\Posts\PostComment');
     }
 
@@ -41,10 +42,4 @@ class Post extends Model
     {
         return Post::with('postComments')->find($post_id)->postComments();
     }
-
-    // いいね
-    // public function likes()
-    // {
-    //     return $this->belongsToMany('App\Models\Like');
-    // }
 }
