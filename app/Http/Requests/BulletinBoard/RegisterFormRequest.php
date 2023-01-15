@@ -108,6 +108,9 @@ class RegisterFormRequest extends FormRequest
       'password.max' => 'パスワードは30文字以内で入力してください。',
       'password.min' => 'パスワードは8文字以上で入力してください。',
       'password.confirmed' => 'パスワードが異なります。',
+      'birth_day.required' => '生年月日を選択してください。',
+      'birth_day.before' => '生年月日に誤りがあります。',
+      'birth_day.after' => '生年月日は2000年以降で記入してください。',
     ];
   }
 }

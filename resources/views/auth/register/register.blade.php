@@ -84,7 +84,7 @@
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
             <option value="none">-----</option>
-            <!-- <option value="1985">1985</option>
+            <option value="1985">1985</option>
             <option value="1986">1986</option>
             <option value="1987">1987</option>
             <option value="1988">1988</option>
@@ -98,7 +98,7 @@
             <option value="1996">1996</option>
             <option value="1997">1997</option>
             <option value="1998">1998</option>
-            <option value="1999">1999</option> -->
+            <option value="1999">1999</option>
             <option value="2000">2000</option>
             <option value="2001">2001</option>
             <option value="2002">2002</option>
@@ -184,6 +184,9 @@
           @endif
           @if ($errors->has('old_day'))
           <p>{{$errors->first('old_day')}}</p>
+          @endif
+          @if ($errors->has('birth_day'))
+          <p>{{$errors->first('birth_day')}}</p>
           @endif
         </div>
         <div class="mt-3">
