@@ -50,7 +50,7 @@ class RegisterFormRequest extends FormRequest
       // 'old_month' => 'required',
       // 'old_day' => 'required',
       // 誕生日を3つのデータを１つのデータとして扱う
-      'birth_day' => 'required|date|before:today|after:2000-01-01',
+      'birth_day' => 'required|date|before:today|after_or_equal:2000-01-01',
       // in...1~4であることをバリデートする
       'role' => 'required|in:1,2,3,4',
 
@@ -61,19 +61,6 @@ class RegisterFormRequest extends FormRequest
 
   // private...クラス自身のみアクセス可能。優先順位高い。
   // protected...クラス内の継承クラスからのアクセスが可能
-  protected function RegisterValidation()
-  {
-    // 日時をデータに追加
-    // filled(valueに入れている値)...キーが存在し、値が入力されたらtrue!(キーが存在しない、nullはfalse)
-    // ?...<条件式>?<真式>:<偽式> ←(条件演算式)
-    // $birth_day = ($this->filled(['old_year', 'old_month', 'old_day'])) ?
-    //   $this->old_year . '-' . $this->old_month . '-' . $this->old_day : '';
-    // $this->merge(['birth_day' => $birth_day]);
-  }
-
-
-
-
 
   // public 優先順位は低い。どこからでもアクセスが可能！
   public function messages()
