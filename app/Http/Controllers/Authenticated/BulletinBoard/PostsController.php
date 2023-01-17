@@ -11,6 +11,7 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\CommentCategoryFormRequest;
 use App\Http\Requests\BulletinBoard\SubCategoryFormRequest;
 use App\Http\Requests\BulletinBoard\MainCategoryFormRequest;
 use Auth;
@@ -107,7 +108,7 @@ class PostsController extends Controller
 
 
     // コメントの登録
-    public function commentCreate(Request $request)
+    public function commentCreate(CommentCategoryFormRequest $request)
     {
         PostComment::create([
             'post_id' => $request->post_id,
