@@ -93,14 +93,14 @@ class PostsController extends Controller
     }
 
     // メインカテゴリー
-    public function mainCategoryCreate(Request $request)
+    public function mainCategoryCreate(MainCategoryFormRequest $request)
     {
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
 
     // サブカテゴリー
-    public function subCategoryCreate(Request $request)
+    public function subCategoryCreate(SubCategoryFormRequest $request)
     {
         SubCategory::create(['sub_category' => $request->sub_category_name]);
         return redirect()->route('post.input');
