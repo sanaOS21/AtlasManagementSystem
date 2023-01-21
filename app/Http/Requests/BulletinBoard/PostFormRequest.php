@@ -32,6 +32,13 @@ class PostFormRequest extends FormRequest
 
     public function messages()
     {
-        return [];
+        return [
+            'post_title.required' => 'タイトルを記入してください。',
+            'post_title.min' => 'タイトルは4文字以上記入してください。',
+            'post_title.max' => 'タイトルは100文字以内にしてください。',
+            'post_body.required' => '投稿内容を記入してください。',
+            'post_body.min' => '投稿内容は10文字以上記入してください。',
+            'post_body.max' => '投稿内容を500文字以内にしてください。',
+        ];
     }
 }

@@ -22,6 +22,7 @@ class UsersController extends Controller
         $gender = $request->sex;
         $role = $request->role;
         $subjects = $request->subjects;; // ここで検索時の科目を受け取る
+        // dd($subjects);
         $userFactory = new SearchResultFactories();
         $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
         // $subjects = Subjects::all();
@@ -30,6 +31,7 @@ class UsersController extends Controller
 
     public function userProfile($id)
     {
+        // findOrFail...一致するidが見つからないときはエラーを返す。
         $user = User::with('subjects')->findOrFail($id);
         $subject_lists = Subjects::all();
         return view('authenticated.users.profile', compact('user', 'subject_lists'));
