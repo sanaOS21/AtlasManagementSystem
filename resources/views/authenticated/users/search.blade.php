@@ -45,7 +45,7 @@
         @if($user->role == 4)
         <span>選択科目 :
           @foreach($user->subjects as $subject)
-          {{$subjects->subject}}
+          {{$subject->subject}}
           @endforeach
         </span>
         @endif
