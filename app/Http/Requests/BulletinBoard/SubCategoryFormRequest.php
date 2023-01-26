@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\RequestsBulletinBoard;
+namespace App\Http\Requests\BulletinBoard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
