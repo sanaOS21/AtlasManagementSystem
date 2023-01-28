@@ -41,10 +41,10 @@
     <div class="category_area mt-5 p-5">
       <div class="">
         <p class="m-0">メインカテゴリー</p>
-        <form action="{{route('main.category.create')}}" method="POST">@csrf
-          <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
-          <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
-        </form>
+        <form action="{{route('main.category.create')}}" method="POST" id="mainCategoryRequest">@csrf</form>
+        <input type="text" class="w-100" name="main_category_id" form="mainCategoryRequest">
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
+
       </div>
 
       <p class=" m-0">サブカテゴリー</p>
