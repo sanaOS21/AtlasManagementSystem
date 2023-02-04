@@ -6,7 +6,6 @@
     <div class="">
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="post_category_id">
-        <option value="">選択してください</option>
         @foreach($main_categories as $main_category)
         <optgroup label="{{ $main_category->main_category }}">
           <!-- サブカテゴリー表示 -->
@@ -41,10 +40,11 @@
     <div class="category_area mt-5 p-5">
       <div class="">
         <p class="m-0">メインカテゴリー</p>
-        <form action="{{route('main.category.create')}}" method="POST" id="mainCategoryRequest">@csrf</form>
-        <input type="text" class="w-100" name="main_category_id" form="mainCategoryRequest">
-        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
 
+        <form action="{{route('main.category.create')}}" method="POST" id="mainCategoryRequest">@csrf</form>
+        <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
+        <span>{{$errors->first('main_category_name')}}</span>
       </div>
 
       <p class=" m-0">サブカテゴリー</p>
@@ -57,6 +57,7 @@
       </select>
       <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest">
       <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
+      <span>{{$errors->first('sub_category_name')}}</span>
     </div>
     </form>
   </div>

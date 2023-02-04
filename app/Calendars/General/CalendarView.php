@@ -11,6 +11,7 @@ class CalendarView
   private $carbon;
   function __construct($date)
   {
+    // new Carbon()= 現在日付のインスタンスができる
     $this->carbon = new Carbon($date);
   }
 
@@ -42,6 +43,7 @@ class CalendarView
 
       $days = $week->getDays();
       foreach ($days as $day) {
+        // copy　複製
         $startDay = $this->carbon->copy()->format("Y-m-01");
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
@@ -63,7 +65,7 @@ class CalendarView
           } else if ($reservePart == 3) {
             $reservePart = "リモ3部";
           }
-          // 今日が大きい＝過去なら〜
+          //$startDay...月初
           if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
@@ -75,6 +77,7 @@ class CalendarView
           // 予約していなければ！
         } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
           $html[] = '<p>受付終了</p>';
+          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         } else {
           $html[] = $day->selectPart($day->everyDay());
         }
@@ -95,8 +98,10 @@ class CalendarView
   protected function getWeeks()
   {
     $weeks = [];
+    // 月初月末
     $firstDay = $this->carbon->copy()->firstOfMonth();
     $lastDay = $this->carbon->copy()->lastOfMonth();
+
     $week = new CalendarWeek($firstDay->copy());
     $weeks[] = $week;
     $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();

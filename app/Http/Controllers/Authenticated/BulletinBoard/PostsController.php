@@ -23,7 +23,8 @@ class PostsController extends Controller
     {
         // postComments...コメントの数
         $posts = Post::with('user', 'postComments')->get();
-        $categories = MainCategory::get();
+        // with...親子関係であれば取得可能
+        $categories = MainCategory::with('subCategories')->get();
         $like = new Like;
         $post_comment = new Post;
         // [02]コメント数表示のため下記追加
@@ -33,8 +34,14 @@ class PostsController extends Controller
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
                 ->orWhere('post', 'like', '%' . $request->keyword . '%')->get();
         } else if ($request->category_word) {
+            // サブカテゴリーで検索
             $sub_category = $request->category_word;
-            $posts = Post::with('user', 'postComments')->get();
+            // subCategoriesも取得するため追記
+            // whereHas...リレーション先のテーブルの条件で検索したい
+            $posts = Post::with('user', 'postComments', 'subCategories')->whereHas('subCategories', function ($q) use ($sub_category) {
+                // return $q->where('sub_category', $sub_category);
+                $q->where('sub_category', $sub_category);
+            })->get();
         } else if ($request->like_posts) {
             // いいねした投稿を表示
             $likes = Auth::user()->likePostId()->get('like_post_id');
@@ -72,6 +79,9 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+        $post = Post::findOrFail($post->id);
+        $post_category = $request->post_category_id;
+        $post->subCategories()->attach($post_category);
         return redirect()->route('post.show');
     }
 

@@ -10,9 +10,14 @@
         {!! $calendar->render() !!}
       </div>
     </div>
-    <div class="text-right w-75 m-auto">
-      <input type="submit" class="btn btn-primary" value="予約する" form="reserveParts">
+    <!-- モーダル -->
+    <div class="modal js-modal">
+      <div class="modal__bg js-modal-close"></div>
+      <div class="modal__content">
+        <span></span>
+        <div class="text-right w-75 m-auto">
+          <input type="submit" class="btn btn-primary" value="予約する" form="reserveParts">
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-@endsection
+    @endsection
