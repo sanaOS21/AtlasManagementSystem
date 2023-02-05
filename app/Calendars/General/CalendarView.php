@@ -71,7 +71,10 @@ class CalendarView
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           } else {
             // キャンセルボタンを設置
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePart . '</button>';
+            // class=""変更してみた（キャンセルモーダルのために）
+            // value=""削除
+
+            $html[] = '<button type="submit" class="cancel-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" delete-date="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '" delete-part="' . $reservePart . '">' . $reservePart . '</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
           // 予約していなければ！

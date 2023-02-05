@@ -10,14 +10,30 @@
         {!! $calendar->render() !!}
       </div>
     </div>
-    <!-- モーダル -->
-    <div class="modal js-modal">
-      <div class="modal__bg js-modal-close"></div>
-      <div class="modal__content">
-        <span></span>
-        <div class="text-right w-75 m-auto">
-          <input type="submit" class="btn btn-primary" value="予約する" form="reserveParts">
-        </div>
+    <div class="text-right w-75 m-auto">
+      <input type="submit" class="btn btn-primary" value="予約する" form="reserveParts">
+    </div>
+  </div>
+</div>
+
+<!-- モーダル -->
+<div class="modal js-modal">
+  <div class="modal__bg js-modal-close"></div>
+  <div class="modal__content">
+    <div class="w-100">
+      <div class="modal-inner-title w-50 m-auto">
+        <p>予約日：<span class="cancel-modal-date"></span></p>
+        <p>時間：<span class="cancel-modal-part"></span></p>
+        <p>上記の予約をキャンセルしてよろしいですか</p>
+      </div>
+      <div class="w-50 m-auto edit-modal-btn d-flex">
+        <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
+        <input type="hidden" class="cancel-date-hidden" name="delete_date" value="" form="deleteParts">
+        <input type="hidden" class="cancel-part-hidden" name="delete_part" value="" form="deleteParts">
+        <input type="submit" class="btn btn-primary d-block" value="キャンセル" form="deleteParts">
       </div>
     </div>
-    @endsection
+    {{ csrf_field() }}
+    </form>
+  </div>
+  @endsection

@@ -22,16 +22,40 @@ class CalendarsController extends Controller
 
     public function reserve(Request $request)
     {
+        // CalendarView.phpのreservePartsフォームから受け取る
         DB::beginTransaction();
         try {
+            // 予約する日を取得
             $getPart = $request->getPart;
+            // 予約する部を取得
             $getDate = $request->getData;
+            // ?
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach ($reserveDays as $key => $value) {
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
                 $reserve_settings->decrement('limit_users');
                 $reserve_settings->users()->attach(Auth::id());
             }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+    }
+    // キャンセル
+    public function delete(Request $request)
+    {
+        // CalendarView.phpのdeletePartsフォームから受け取る
+        DB::beginTransaction();
+        try {
+            // 予約する日を取得
+            $getDate = $request->delete_date;
+            // 予約する部を取得
+            $getPart = $request->delete_part;
+            // ?
+            $reserve_settings = ReserveSettings::where('setting_reserve', $getDate)->where('setting_part', $getPart)->first();
+            $reserve_settings->increment('limit_users');
+            $reserve_settings->users()->detach(Auth::id());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
