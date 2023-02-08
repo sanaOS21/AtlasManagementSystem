@@ -6,7 +6,7 @@ $(function () {
     var delete_part = $(this).attr('delete_part');
     $('.cancel-modal-hidden').val(delete_date);
     $('.cancel-modal-date').text(delete_date);
-    $('.cancel-modal-part').val(delete_part);
+    $('.cancel-modal-part').text(delete_part);
     return false;
   });
 
