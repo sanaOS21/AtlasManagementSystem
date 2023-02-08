@@ -27,10 +27,10 @@
         <p>上記の予約をキャンセルしてよろしいですか</p>
       </div>
       <div class="w-50 m-auto edit-modal-btn d-flex">
-        <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
+        <a class="js-modal-close btn btn-primary d-inline-block" href="">閉じる</a>
         <input type="hidden" class="cancel-date-hidden" name="delete_date" value="" form="deleteParts">
         <input type="hidden" class="cancel-part-hidden" name="delete_part" value="" form="deleteParts">
-        <input type="submit" class="btn btn-primary d-block" value="キャンセル" form="deleteParts">
+        <input type="submit" class="btn  btn-danger d-block" value="キャンセル" form="deleteParts">
       </div>
     </div>
     {{ csrf_field() }}

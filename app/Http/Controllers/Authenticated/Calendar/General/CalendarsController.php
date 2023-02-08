@@ -53,7 +53,7 @@ class CalendarsController extends Controller
 
             // 予約する部を取得
             $getPart = $request->delete_part;
-            dd($getPart);
+            // dd($getPart);
             $reserve_settings = ReserveSettings::where('setting_reserve', $getDate)->where('setting_part', $getPart)->first();
             $reserve_settings->increment('limit_users');
             $reserve_settings->users()->detach(Auth::id());
