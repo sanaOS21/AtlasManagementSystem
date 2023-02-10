@@ -60,9 +60,9 @@ class CalendarView
           $reservePartId = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if ($reservePartId == 1) {
             $reservePart = "リモ1部";
-          } else if ($reservePart == 2) {
+          } else if ($reservePartId == 2) {
             $reservePart = "リモ2部";
-          } else if ($reservePart == 3) {
+          } else if ($reservePartId == 3) {
             $reservePart = "リモ3部";
           }
           //$startDay...月初
