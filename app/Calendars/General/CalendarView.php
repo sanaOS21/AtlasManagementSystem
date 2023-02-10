@@ -57,8 +57,8 @@ class CalendarView
 
         // 予約済みであれば下記対応
         if (in_array($day->everyDay(), $day->authReserveDay())) {
-          $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-          if ($reservePart == 1) {
+          $reservePartId = $day->authReserveDate($day->everyDay())->first()->setting_part;
+          if ($reservePartId == 1) {
             $reservePart = "リモ1部";
           } else if ($reservePart == 2) {
             $reservePart = "リモ2部";
@@ -73,7 +73,7 @@ class CalendarView
             // キャンセルボタンを設置
             // class=""変更してみた（キャンセルモーダルのために）
             // value=""削除
-            $html[] = '<button type="submit" class="cancel-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" delete_date="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '" delete_part="' . $reservePart . '">' . $reservePart . '</button>';
+            $html[] = '<button type="submit" class="cancel-modal-open btn btn-danger p-0 w-75" name="" style="font-size:12px" delete_date="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '" delete_part="' . $reservePart . '" delete-part-id="' . $reservePartId . '"> ' . $reservePart . '</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
           // 予約していなければ！
