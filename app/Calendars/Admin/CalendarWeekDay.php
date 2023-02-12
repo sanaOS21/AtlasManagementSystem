@@ -1,5 +1,5 @@
 <?php
-
+// スクール予約確認
 namespace App\Calendars\Admin;
 
 use Carbon\Carbon;
@@ -40,13 +40,19 @@ class CalendarWeekDay
 
     $html[] = '<div class="text-left">';
     if ($one_part) {
-      $html[] = '<p class="day_part m-0 pt-1">1部</p>';
+      // スクールのカウント
+      // $partCount =
+      $html[] =
+        '<p class="day_part m-0 pt-1">1部<span
+        style="margin-left: 15px">' . $one_part->users->count() . '</span></p>';
     }
     if ($two_part) {
-      $html[] = '<p class="day_part m-0 pt-1">2部</p>';
+      $html[] =
+        '<p class="day_part m-0 pt-1">2部<span style="margin-left:15px">' . $two_part->users->count() . '</span></p>';
     }
     if ($three_part) {
-      $html[] = '<p class="day_part m-0 pt-1">3部</p>';
+      $html[] =
+        '<p class="day_part m-0 pt-1">3部<span style="margin-left:15px">' . $three_part->users->count() . '</span></p>';
     }
     $html[] = '</div>';
 

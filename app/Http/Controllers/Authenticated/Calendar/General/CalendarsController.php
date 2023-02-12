@@ -29,7 +29,8 @@ class CalendarsController extends Controller
             $getPart = $request->getPart;
             // 予約する部を取得
             $getDate = $request->getData;
-            // ?
+            // array_filter...コールバック関数を使用して配列の要素をフィルタリング
+            // array_combine...キーと値の２つの配列を結合して連想配列を作る
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach ($reserveDays as $key => $value) {
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
@@ -50,11 +51,12 @@ class CalendarsController extends Controller
         try {
             // 予約する日を取得
             $getDate = $request->delete_date;
-
             // 予約する部を取得
             $getPart = $request->delete_part;
             // dd($getPart);
+            // ReserveSettings...カレンダー内の予約とかのDB
             $reserve_settings = ReserveSettings::where('setting_reserve', $getDate)->where('setting_part', $getPart)->first();
+            // limit_users...(多分)ユーザが選択した部門
             $reserve_settings->increment('limit_users');
             $reserve_settings->users()->detach(Auth::id());
             DB::commit();
